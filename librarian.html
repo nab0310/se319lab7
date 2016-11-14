@@ -5,13 +5,13 @@
     {{library}}
 
     <table>
-        <th> <h2>Book ID</h2></th> <th> <h2>Book Name</h2></th>
+        <th> <h2>Literature</h2></th> <th> <h2>Science</h2></th> <th> <h2>Sport</h2></th> <th> <h2>Art</h2></th>
         <tr ng-repeat="book in library">
             <td ng-repeat="(key, val) in book" ng-click="bookClick()"> {{val}}</td>
         </tr>
     </table>
 
-    <hr>
+    <br><hr>
 
     {{message}}
 
