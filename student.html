@@ -1,1 +1,29 @@
 <p>This is the {{name}} view!</p>
+
+<h1>Table of Student Names (by looping over an array) </h1>
+<div ng-app="myApp" ng-controller="studentController">
+    {{library}}
+
+    <table>
+        <th> <h2>Book ID</h2></th> <th> <h2>Book Name</h2></th>
+        <tr ng-repeat="book in library">
+            <td ng-repeat="(key, val) in book"> {{val}}</td>
+        </tr>
+    </table>
+
+
+</div>
+<hr>
+
+
+
+
+<!--
+<table>
+        <th> <h2>First Name</h2></th> <th> <h2>Last Name</h2></th>
+        <tr ng-repeat="student in studentsObj">
+            <td ng-repeat="(key, val) in student"> {{val}}</td>
+        </tr>
+    </table>
+
+-->

@@ -1,8 +1,9 @@
 /**
  * Created by nab0310 on 11/13/2016.
  */
-angular.module('myApp', ['ngRoute']) //ngRoute is an angular service
-    .config(function ($routeProvider) {
+var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
+
+    app.config(function ($routeProvider) {
         $routeProvider.when("/librarian",{
             controller:"librarianController",
             templateUrl: "librarian.html"
@@ -15,8 +16,8 @@ angular.module('myApp', ['ngRoute']) //ngRoute is an angular service
             controller: "loginController",
             templateUrl: "login.html"
         });
-    })
-    .controller('loginController', function($scope) {
+    });
+    app.controller('loginController', function($scope) {
         $scope.name = "IndexView";
         $scope.validate = function () {
             username = $scope.username;
@@ -34,10 +35,21 @@ angular.module('myApp', ['ngRoute']) //ngRoute is an angular service
                 alert("Incorrect Username and Password!")
             }
         }
-    })
-    .controller('studentController', function ($scope) {
-       $scope.name = "Student";
-    })
-    .controller('librarianController', function ($scope) {
+    });
+
+    app.service('libraryService', function(){
+        this.books = [];
+        this.books[0] = {name: 'book1', id: '1'};
+        this.books[0] = {name: 'book2', id: '2'};
+        this.books[0] = {name: 'book3', id: '3'};
+        this.books[0] = {name: 'book4', id: '4'};
+    });
+
+    app.controller('studentController', function ($scope, libraryService) {
+        $scope.name = "Student";
+        $scope.library = libraryService.books;
+    });
+    app.controller('librarianController', function ($scope, libraryService) {
         $scope.name = "Librarian";
+        $scope.library = libraryService.books;
     });
