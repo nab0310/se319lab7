@@ -7,7 +7,7 @@
     <table>
         <th> <h2>Literature</h2></th> <th> <h2>Science</h2></th> <th> <h2>Sport</h2></th> <th> <h2>Art</h2></th>
         <tr ng-repeat="book in library">
-            <td ng-repeat="(key, val) in book" ng-click="bookClick()"> {{val}}</td>
+            <td ng-click="bookClick()"> {{book.name}}</td>
         </tr>
     </table>
 

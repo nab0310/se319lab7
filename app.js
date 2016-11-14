@@ -39,10 +39,10 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
 
     app.service('libraryService', function(){
         this.books = [];
-        this.books[0] = {name: 'book1', id: '1'};
-        this.books[1] = {name: 'book2', id: '2'};
-        this.books[2] = {name: 'book3', id: '3'};
-        this.books[3] = {name: 'book4', id: '4'};
+        this.books[0] = {name: 'book1', id: '1', category: 'Sport'};
+        this.books[1] = {name: 'book2', id: '2', category: 'Art'};
+        this.books[2] = {name: 'book3', id: '3', category: 'Sport'};
+        this.books[3] = {name: 'book4', id: '4', category: 'Art'};
     });
 
     app.controller('studentController', function ($scope, libraryService) {
