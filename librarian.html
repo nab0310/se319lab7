@@ -1,28 +1,27 @@
 <p>This is the {{name}} view!</p>
 
-<h1>Table of Student Names (by looping over an array) </h1>
+<a href="#/">Logout</a>
 <div ng-app="myApp" ng-controller="librarianController">
     {{library}}
-
     <table>
-        <th> <h2>Literature</h2></th> <th> <h2>Science</h2></th> <th> <h2>Sport</h2></th> <th> <h2>Art</h2></th>
-        <!--<tr ng-repeat="data in splitData">-->
-            <!--<td ng-repeat="b in data" ng-click="bookClick()">{{b.name}}</td>-->
-        <!--</tr>-->
         <tr></tr>
-        <td ng-repeat="book in library | filter : {shelf: 'Literature'}">
+        <th>Literature</th>
+        <td ng-click ="bookClick()" ng-repeat="book in library | filter : {shelf: 'Literature'}" ng-class="{checkedOut: book.presence === '0'}">
             {{book.name}}
         </td>
         <tr></tr>
-        <td ng-repeat="book in library | filter : {shelf: 'Science'}">
+        <th>Science</th>
+        <td ng-click ="bookClick()" ng-repeat="book in library | filter : {shelf: 'Science'}" ng-class="{checkedOut: book.presence === '0'}">
             {{book.name}}
         </td>
         <tr></tr>
-        <td ng-repeat="book in library | filter : {shelf: 'Sport'}">
+        <th>Sport</th>
+        <td ng-click ="bookClick()" ng-repeat="book in library | filter : {shelf: 'Sport'}" ng-class="{checkedOut: book.presence === '0'}">
             {{book.name}}
         </td>
         <tr></tr>
-        <td ng-repeat="book in library | filter : {shelf: 'Art'}">
+        <th>Art</th>
+        <td ng-click ="bookClick()" ng-repeat="book in library | filter : {shelf: 'Art'}" ng-class="{checkedOut: book.presence === '0'}">
             {{book.name}}
         </td>
         <tr></tr>

@@ -20,7 +20,7 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
     app.controller('loginController', function($scope, $rootScope) {
         $rootScope.books =[];
         column ="";
-        for(i=0;i<10;i++){
+        for(i=0;i<20;i++){
             if(i%4==0){
                 column = "Literature";
             }
@@ -33,7 +33,22 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
             if(i%4==3){
                 column = "Art";
             }
-            $rootScope.books.push({name:'book'+i,shelf:column,borrowedBy:'',presence:'1'});
+            $rootScope.books.push({name:'B'+i,shelf:column,borrowedBy:'',presence:'1'});
+        }
+        for(j=0;j<5;j++){
+            if(j%4==0){
+                column = "Literature";
+            }
+            if(j%4==1){
+                column = "Science";
+            }
+            if(j%4==2){
+                column = "Sport";
+            }
+            if(j%4==3){
+                column = "Art";
+            }
+            $rootScope.books.push({name:'R'+j,shelf:column,borrowedBy:'',presence:'0'});
         }
         $scope.name = "IndexView";
         $scope.validate = function () {
