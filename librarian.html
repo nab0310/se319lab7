@@ -6,9 +6,26 @@
 
     <table>
         <th> <h2>Literature</h2></th> <th> <h2>Science</h2></th> <th> <h2>Sport</h2></th> <th> <h2>Art</h2></th>
-        <tr ng-repeat="data in splitData">
-            <td ng-repeat="b in data" ng-click="bookClick()">{{b.name}}</td>
-        </tr>
+        <!--<tr ng-repeat="data in splitData">-->
+            <!--<td ng-repeat="b in data" ng-click="bookClick()">{{b.name}}</td>-->
+        <!--</tr>-->
+        <tr></tr>
+        <td ng-repeat="book in library | filter : {shelf: 'Literature'}">
+            {{book.name}}
+        </td>
+        <tr></tr>
+        <td ng-repeat="book in library | filter : {shelf: 'Science'}">
+            {{book.name}}
+        </td>
+        <tr></tr>
+        <td ng-repeat="book in library | filter : {shelf: 'Sport'}">
+            {{book.name}}
+        </td>
+        <tr></tr>
+        <td ng-repeat="book in library | filter : {shelf: 'Art'}">
+            {{book.name}}
+        </td>
+        <tr></tr>
     </table>
 
     <form>
@@ -17,10 +34,10 @@
         Select a Shelf:
         <select ng-model="Shelf">
             <option value="">
-            <option value="4">Literature
-            <option value="1">Science
-            <option value="2">Sport
-            <option value="3">Art
+            <option value="Literature">Literature
+            <option value="Science">Science
+            <option value="Sport">Sport
+            <option value="Art">Art
         </select>
         <button ng-click="addRow()">Add Book</button>
     </form>

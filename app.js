@@ -17,7 +17,24 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
             templateUrl: "login.html"
         });
     });
-    app.controller('loginController', function($scope) {
+    app.controller('loginController', function($scope, $rootScope) {
+        $rootScope.books =[];
+        column ="";
+        for(i=0;i<10;i++){
+            if(i%4==0){
+                column = "Literature";
+            }
+            if(i%4==1){
+                column = "Science";
+            }
+            if(i%4==2){
+                column = "Sport";
+            }
+            if(i%4==3){
+                column = "Art";
+            }
+            $rootScope.books.push({name:'book'+i,shelf:column,borrowedBy:'',presence:'1'});
+        }
         $scope.name = "IndexView";
         $scope.validate = function () {
             username = $scope.username;
@@ -39,47 +56,34 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
 
     app.service('libraryService', function(){
         this.books = [];
-        this.books[0] = {name: 'book1', id: '1', borrowedBy: '', presence:'1'};
-        this.books[1] = {name: 'book2', id: '2', borrowedBy: '', presence:'1'};
-        this.books[2] = {name: 'book3', id: '3', borrowedBy: '', presence:'1'};
-        this.books[3] = {name: 'book4', id: '4', borrowedBy: '', presence:'1'};
-        this.books[4] = {name: 'book5', id: '5', borrowedBy: '', presence:'1'};
-        this.books[5] = {name: 'book6', id: '6', borrowedBy: '', presence:'1'};
-        this.books[6] = {name: 'book7', id: '7', borrowedBy: '', presence:'1'};
-        this.books[7] = {name: 'book8', id: '8', borrowedBy: '', presence:'1'};
+        this.books[0] = {name: 'book1', shelf: 'Literature', borrowedBy: '', presence:'1'};
+        this.books[1] = {name: 'book2', shelf: 'Science', borrowedBy: '', presence:'1'};
+        this.books[2] = {name: 'book3', shelf: 'Sport', borrowedBy: '', presence:'1'};
+        this.books[3] = {name: 'book4', shelf: 'Art', borrowedBy: '', presence:'1'};
+        this.books[4] = {name: 'book5', shelf: 'Literature', borrowedBy: '', presence:'1'};
+        this.books[5] = {name: 'book6', shelf: 'Science', borrowedBy: '', presence:'1'};
+        this.books[6] = {name: 'book7', shelf: 'Sport', borrowedBy: '', presence:'1'};
+        this.books[7] = {name: 'book8', shelf: 'Art', borrowedBy: '', presence:'1'};
     });
 
-    app.controller('studentController', function ($scope, libraryService) {
+    app.controller('studentController', function ($scope, $rootScope) {
         $scope.name = "Student";
-        $scope.library = libraryService.books;
+        $scope.library = $rootScope.books;
         $scope.message = "Nothing clicked yet.";
         $scope.bookClick = function() {
             $scope.message = "Student Click!";
         };
     });
-    app.controller('librarianController', function ($scope, libraryService) {
+    app.controller('librarianController', function ($scope, $rootScope) {
         $scope.name = "Librarian";
-        $scope.library = libraryService.books;
+        $scope.library = $rootScope.books;
         $scope.message = "Nothing clicked.";
         $scope.bookClick = function() {
             $scope.message = "Librarian Click!";
         };
-        $scope.splitData = splitIntoRows(libraryService.books,4);
 
         $scope.addRow = function(){
-            libraryService.books.push({name:$scope.bookName, id: $scope.Shelf, borrowedBy:'', presence: '1' });
+            $rootScope.books.push({name:$scope.bookName, shelf: $scope.Shelf, borrowedBy:'', presence: '1' });
         };
 
-        function splitIntoRows(items, itemsPerRow) {
-            var rslt = [];
-            items.forEach(function(item, index) {
-                var rowIndex = Math.floor(index / itemsPerRow),
-                    colIndex = item.id % itemsPerRow;
-                if (!rslt[rowIndex]) {
-                    rslt[rowIndex] = [];
-                }
-                rslt[rowIndex][colIndex] = item;
-            });
-            return rslt;
-        }
     });
