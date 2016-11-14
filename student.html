@@ -7,23 +7,12 @@
     <table>
         <th> <h2>Book ID</h2></th> <th> <h2>Book Name</h2></th>
         <tr ng-repeat="book in library">
-            <td ng-repeat="(key, val) in book"> {{val}}</td>
+            <td ng-repeat="(key, val) in book" ng-click="bookClick()"> {{val}}</td>
         </tr>
     </table>
 
+    <hr>
+
+    {{message}}
 
 </div>
-<hr>
-
-
-
-
-<!--
-<table>
-        <th> <h2>First Name</h2></th> <th> <h2>Last Name</h2></th>
-        <tr ng-repeat="student in studentsObj">
-            <td ng-repeat="(key, val) in student"> {{val}}</td>
-        </tr>
-    </table>
-
--->
