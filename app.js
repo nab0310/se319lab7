@@ -39,12 +39,6 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
 
     app.service('libraryService', function(){
         this.books = [];
-<<<<<<< HEAD
-        this.books[0] = {name: 'book1', id: '1', category: 'Sport'};
-        this.books[1] = {name: 'book2', id: '2', category: 'Art'};
-        this.books[2] = {name: 'book3', id: '3', category: 'Sport'};
-        this.books[3] = {name: 'book4', id: '4', category: 'Art'};
-=======
         this.books[0] = {name: 'book1', id: '1', borrowedBy: '', presence:'1'};
         this.books[1] = {name: 'book2', id: '2', borrowedBy: '', presence:'1'};
         this.books[2] = {name: 'book3', id: '3', borrowedBy: '', presence:'1'};
@@ -53,8 +47,6 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
         this.books[5] = {name: 'book6', id: '6', borrowedBy: '', presence:'1'};
         this.books[6] = {name: 'book7', id: '7', borrowedBy: '', presence:'1'};
         this.books[7] = {name: 'book8', id: '8', borrowedBy: '', presence:'1'};
-
->>>>>>> cd916d00da2d10b33d189863eaa1d72702b6d796
     });
 
     app.controller('studentController', function ($scope, libraryService) {
@@ -74,8 +66,8 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
         };
         $scope.splitData = splitIntoRows(libraryService.books,4);
 
-        $scope.addBook = function() {
-            libraryService.books.push({name: $scope.bookName,id:$scope.Shelf,borrowedBy:'',presence:'1'});
+        $scope.addRow = function(){
+            libraryService.books.push({name:$scope.bookName, id: $scope.Shelf, borrowedBy:'', presence: '1' });
         };
 
         function splitIntoRows(items, itemsPerRow) {

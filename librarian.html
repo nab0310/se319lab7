@@ -2,17 +2,12 @@
 
 <h1>Table of Student Names (by looping over an array) </h1>
 <div ng-app="myApp" ng-controller="librarianController">
-    {{splitData}}
+    {{library}}
 
     <table>
         <th> <h2>Literature</h2></th> <th> <h2>Science</h2></th> <th> <h2>Sport</h2></th> <th> <h2>Art</h2></th>
-<<<<<<< HEAD
-        <tr ng-repeat="book in library">
-            <td ng-click="bookClick()"> {{book.name}}</td>
-=======
         <tr ng-repeat="data in splitData">
-            <td ng-repeat="b in data">{{b.name}}</td>
->>>>>>> cd916d00da2d10b33d189863eaa1d72702b6d796
+            <td ng-repeat="b in data" ng-click="bookClick()">{{b.name}}</td>
         </tr>
     </table>
 
@@ -22,13 +17,14 @@
         Select a Shelf:
         <select ng-model="Shelf">
             <option value="">
-            <option value="1">Literature
-            <option value="2">Science
-            <option value="3">Sport
-            <option value="4">Art
+            <option value="4">Literature
+            <option value="1">Science
+            <option value="2">Sport
+            <option value="3">Art
         </select>
-        <button ng-click="addBook()">Add Book</button>
+        <button ng-click="addRow()">Add Book</button>
     </form>
+    <div>You book is named {{bookName}} and it is on shelf {{Shelf}}</div>
     <br><hr>
 
     {{message}}
