@@ -55,12 +55,11 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
             username = $scope.username;
             password = $scope.password;
             if(username && password =="admin"){
-                localStorage.setItem("username",username);
-                localStorage.setItem("NumberOfBooks",2);
+                $rootScope.username = "admin";
                 window.location = "#/librarian";
             }else if(username.charAt(0)=='U'||username.charAt(0)=='u'){
-                localStorage.setItem("username",username);
-                localStorage.setItem("NumberOfBooks",2);
+                $rootScope.username = username;
+                $rootScope.numberOfBooks = 2;
                 window.location = "#/student";
             }
             else{
@@ -74,6 +73,31 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
         $scope.library = $rootScope.books;
         $scope.message = "Nothing clicked yet.";
         $scope.bookClick = function($bookName) {
+            alert($rootScope.numberOfBooks);
+
+                for (i = 0; i < $rootScope.books.length; i++) {
+                    if ($rootScope.books[i].name == $bookName) {
+                        alert("Found book");
+                        if ($rootScope.books[i].presence == 1 && $rootScope.numberOfBooks > 0){
+                            alert("Checkout");
+                            $rootScope.books[i].presence = 0;
+                            $rootScope.books[i].borrowedBy = $rootScope.username;
+                            $rootScope.numberOfBooks = $rootScope.numberOfBooks - 1;
+                        }
+                        else {
+                            if ($rootScope.books[i].borrowedBy == $rootScope.username) {
+                                alert("Return");
+                                $rootScope.books[i].presence = 1;
+                                $rootScope.books[i].borrowedBy = "";
+                                $rootScope.numberOfBooks = $rootScope.numberOfBooks + 1;
+                            }
+                            else {
+                                alert("This book is not available.");
+                            }
+                        }
+                    }
+                }
+
             $scope.message = "Student Clicked " + $bookName;
         };
     });
