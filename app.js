@@ -12,12 +12,16 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
             controller:"studentController",
             templateUrl: "student.html"
         });
-        $routeProvider.when("/", {
+        $routeProvider.when("/login", {
             controller: "loginController",
             templateUrl: "login.html"
         });
+        $routeProvider.when("/", {
+            controller: "indexController",
+            templateUrl: "login.html"
+        });
     });
-    app.controller('loginController', function($scope, $rootScope) {
+    app.controller('indexController', function($scope, $rootScope) {
         $rootScope.books =[];
         column ="";
         for(i=0;i<20;i++){
@@ -48,8 +52,11 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
             if(j%4==3){
                 column = "Art";
             }
-            $rootScope.books.push({name:'R'+j, bookType: 'reference', shelf:column,borrowedBy:'',presence:'0'});
+            $rootScope.books.push({name:'R'+j, bookType: 'reference', shelf:column,borrowedBy:'reference',presence:'0'});
         }
+        window.location = "#/login";
+    });
+    app.controller('loginController', function($scope, $rootScope) {
         $scope.name = "IndexView";
         $scope.validate = function () {
             username = $scope.username;
@@ -73,20 +80,24 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
         $scope.library = $rootScope.books;
         $scope.message = "Nothing clicked yet.";
         $scope.bookClick = function($bookName) {
+            if($rootScope.numberOfBooks==2) {
+                for (j = 0; j < $rootScope.books.length; j++) {
+                    if ($rootScope.books[j].borrowedBy == $rootScope.username) {
+                        $rootScope.numberOfBooks--;
+                    }
+                }
+            }
             alert($rootScope.numberOfBooks);
 
                 for (i = 0; i < $rootScope.books.length; i++) {
                     if ($rootScope.books[i].name == $bookName) {
-                        alert("Found book");
                         if ($rootScope.books[i].presence == 1 && $rootScope.numberOfBooks > 0){
-                            alert("Checkout");
                             $rootScope.books[i].presence = 0;
                             $rootScope.books[i].borrowedBy = $rootScope.username;
                             $rootScope.numberOfBooks = $rootScope.numberOfBooks - 1;
                         }
                         else {
                             if ($rootScope.books[i].borrowedBy == $rootScope.username) {
-                                alert("Return");
                                 $rootScope.books[i].presence = 1;
                                 $rootScope.books[i].borrowedBy = "";
                                 $rootScope.numberOfBooks = $rootScope.numberOfBooks + 1;
@@ -112,7 +123,7 @@ var app = angular.module('myApp', ['ngRoute']); //ngRoute is an angular service
 
         $scope.addRow = function(){
             if($scope.Reference==1){
-                $rootScope.books.push({name:$scope.bookName, bookType: 'reference', shelf: $scope.Shelf, borrowedBy:'', presence: '0' });
+                $rootScope.books.push({name:$scope.bookName, bookType: 'reference', shelf: $scope.Shelf, borrowedBy:'reference', presence: '0' });
             }else {
                 $rootScope.books.push({name: $scope.bookName, bookType: 'ordinary', shelf: $scope.Shelf, borrowedBy: '', presence: '1'});
             }

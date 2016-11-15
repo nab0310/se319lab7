@@ -1,30 +1,24 @@
-<p>This is the {{name}} view!</p>
-
-<script>
-
-</script>
-<a href="#/">Logout</a>
+<a href="#/login">Logout</a>
 <div ng-app="myApp" ng-controller="studentController">
-    {{library}}
     <table>
         <tr></tr>
         <th>Literature</th>
-        <td ng-click ="bookClick(book.name)" ng-repeat="book in library | filter : {shelf: 'Literature'}" ng-class="{checkedOut: book.presence === '0', available: book.presence === '1'}">
+        <td ng-click ="bookClick(book.name)" ng-repeat="book in library | filter : {shelf: 'Literature'}" ng-class="{checkedOut: book.bookType === 'reference', checkedOut: book.borrowedBy !== ''}">
             {{book.name}}
         </td>
         <tr></tr>
         <th>Science</th>
-        <td ng-click ="bookClick(book.name)" ng-repeat="book in library | filter : {shelf: 'Science'}" ng-class="{checkedOut: book.presence === '0'}">
+        <td ng-click ="bookClick(book.name)" ng-repeat="book in library | filter : {shelf: 'Science'}" ng-class="{checkedOut: book.bookType === 'reference', checkedOut: book.borrowedBy !== ''}">
             {{book.name}}
         </td>
         <tr></tr>
         <th>Sport</th>
-        <td ng-click ="bookClick(book.name)" ng-repeat="book in library | filter : {shelf: 'Sport'}" ng-class="{checkedOut: book.presence === '0'}">
+        <td ng-click ="bookClick(book.name)" ng-repeat="book in library | filter : {shelf: 'Sport'}" ng-class="{checkedOut: book.bookType === 'reference', checkedOut: book.borrowedBy !== ''}">
             {{book.name}}
         </td>
         <tr></tr>
         <th>Art</th>
-        <td ng-click ="bookClick(book.name)" ng-repeat="book in library | filter : {shelf: 'Art'}" ng-class="{checkedOut: book.presence === '0'}">
+        <td ng-click ="bookClick(book.name)" ng-repeat="book in library | filter : {shelf: 'Art'}" ng-class="{checkedOut: book.bookType === 'reference', checkedOut: book.borrowedBy !== ''}">
             {{book.name}}
         </td>
         <tr></tr>
@@ -32,7 +26,5 @@
 
 
     <br><hr>
-
-    {{message}}
 
 </div>
